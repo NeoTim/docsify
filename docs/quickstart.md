@@ -6,6 +6,18 @@ It is recommended to install `docsify-cli` globally, which helps initializing an
 npm i docsify-cli -g
 ```
 
+```c
+#include <stdio.h>
+```
+
+
+```java
+
+public static void main(String[] args) {    
+    int a = 0;
+}
+```
+
 ## Initialize
 
 If you want to write the documentation in the `./docs` subdirectory, you can use the `init` command.

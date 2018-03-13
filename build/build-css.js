@@ -32,10 +32,11 @@ var loadLib = function (file) {
 var list = fs.readdirSync(resolve(__dirname, '../src/themes'))
 
 list.forEach(function (file) {
-  if (!/\.css$/.test(file)) return
+  if (!/\.scss$/.test(file)) return
   processor
     .process(load(file), { from: resolve(__dirname, '../src/themes/', file) })
     .then(function (result) {
+      file = file.replace(/scss$/, 'css')
       save(file, result.css)
       console.log('salad - ' + file)
       isProd &&

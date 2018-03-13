@@ -31,9 +31,10 @@
     "postinstall": "opencollective postinstall"
   },
   "dependencies": {
+    "jquery": "^3.3.1",
     "marked": "^0.3.12",
-    "opencollective": "^1.0.3",
     "medium-zoom": "^0.3.0",
+    "opencollective": "^1.0.3",
     "prismjs": "^1.9.0",
     "tinydate": "^1.0.0",
     "tweezer.js": "^1.4.0"

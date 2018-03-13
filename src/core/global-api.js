@@ -4,7 +4,7 @@ import { Compiler } from './render/compiler'
 import { slugify } from './render/slugify'
 import { get } from './fetch/ajax'
 import marked from 'marked'
-import prism from 'prismjs'
+import prism from '../external/prism'
 
 export default function () {
   window.Docsify = { util, dom, get, slugify }

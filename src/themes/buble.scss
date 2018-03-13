@@ -5,8 +5,8 @@ $color-bg: #fff;
 $color-text: #34495e;
 $sidebar-width: 16rem;
 
-@import 'basic/layout';
-@import 'basic/coverpage';
+@import 'basic/_layout.css';
+@import 'basic/_coverpage.css';
 
 /* sidebar */
 .sidebar {
