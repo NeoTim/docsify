@@ -80,8 +80,6 @@ export function renderMixin(proto) {
     proto._renderTo = function (el, content, replace) {
         const node = dom.getNode(el)
         if (node) node[replace ? 'outerHTML' : 'innerHTML'] = content
-        // $("pre").addClass("line-numbers");
-        // Prism.highlightAll();
     }
 
     proto._renderSidebar = function (text) {
@@ -252,8 +250,4 @@ export function initRender(vm) {
     }
     vm._updateRender()
     dom.toggleClass(dom.body, 'ready')
-
-
-    //$("pre").addClass("line-numbers");
-
 }

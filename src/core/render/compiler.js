@@ -178,13 +178,6 @@ export class Compiler {
         }
         // highlight code
         origin.code = renderer.code = function (code, lang = '') {
-            // code = code.replace(/@DOCSIFY_QM@/g, '`')
-            // const hl = Prism.highlight(
-            //     code,
-            //     Prism.languages[lang] || Prism.languages.markup
-            // )
-            //
-            // return `<pre v-pre data-lang="${lang}" class="line-numbers"><code class="lang-${lang}">${hl}</code></pre>`
             code = code.replace(/</g, "&lt").replace(/>/g, "&gt");
             return `<pre v-pre data-lang="${lang}"><code class="language-${lang} lang-${lang}">${code}</code></pre>`
         }
