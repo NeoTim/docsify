@@ -76,6 +76,31 @@ function renderNameLink(vm) {
     }
 }
 
+function addNumLabelForSidebar(root, prefix, index) {
+    for (let i = 0; i < root.children.length; i++) {
+
+        let node = root.children[i];
+        //console.log(node.nodeName);
+        if (node.nodeName === "ul") {
+            addNumLabelForSidebar(node, prefix + index + ".", 1);
+            index++;
+            continue;
+        }
+
+        //console.log(node.children)
+        if (node.children === undefined || node.children.length === 0) {
+            node.innerHTML = "<b>" + prefix + index + ".</b> " + node.innerHTML;
+            continue;
+        }
+        addNumLabelForSidebar(node, prefix, index);
+        index++;
+        // console.log(node.nodeName)
+        // for(let j = 0; j < node.children.length; j++) {
+        //     console.log(node.children[j].innerHTML)
+        // }
+    }
+}
+
 export function renderMixin(proto) {
     proto._renderTo = function (el, content, replace) {
         const node = dom.getNode(el)
@@ -84,7 +109,22 @@ export function renderMixin(proto) {
 
     proto._renderSidebar = function (text) {
         const {maxLevel, subMaxLevel, loadSidebar} = this.config
-        this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
+        // console.log(html);
+        // let parser = new DOMParser();
+        // let dom = parser.parseFromString(html, "text/xml");
+        // console.log(dom.childNodes[0].children);
+        let html = this.compiler.sidebar(text, maxLevel);
+        let parser = new DOMParser();
+        let dom = parser.parseFromString(html, "text/xml");
+        //console.log(dom)
+        if (dom.children.length > 0) {
+            addNumLabelForSidebar(dom.children[0], '', 1);
+            let xmlserializer = new XMLSerializer()
+            html = xmlserializer.serializeToString(dom)
+        }
+        // console.log(html);
+        //this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
+        this._renderTo('.sidebar-nav', html)
         const activeEl = getAndActive(this.router, '.sidebar-nav', true, true)
         if (loadSidebar && activeEl) {
             activeEl.parentNode.innerHTML +=
