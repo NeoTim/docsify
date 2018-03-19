@@ -1,29 +1,50 @@
-## docsify
+* Java
 
-> A magical documentation site generator.
-
-## What is it
-
-docsify generates your documentation website on the fly. Unlike GitBook, it does not generate static html files. Instead, it smartly loads and parses your Markdown files and displays them as website. All you need to do is create an `index.html` to start and [deploy it on GitHub Pages](deploy.md).
-
-See the [Quick start](quickstart.md) for more details.
-
-## Features
-
-* No statically built html files
-* Simple and lightweight (~19kB gzipped)
-* Smart full-text search plugin
-* Multiple themes
-* Useful plugin API
-* Emoji support
-* Compatible with IE10+
-
-- Support SSR ([example](https://github.com/QingWei-Li/docsify-ssr-demo))
-
-## Examples
-
-Check out the [Showcase](https://github.com/QingWei-Li/docsify/#showcase) to docsify in use.
-
-## Donate
-
-Please consider donating if you think docsify is helpful to you or that my work is valuable. I am happy if you can help me [buy a cup of coffee](https://github.com/QingWei-Li/donate). :heart:
+  * [路径](java/路径.md)
+  * [Lombok](java/Lombok.md)
+  
+* Spring
+  - [web.xml 配置](spring/web-xml-配置.md)
+  - MVC
+    + [使用](spring/mvc/README.md)
+* IDEA
+  - [使用](idea/README.md)
+  - [快捷键](idea/快捷键.md)
+* Sublime
+  - [使用](sublime/README.md)
+  - [中文输入](sublime/中文输入.md)
+* Atom
+  - [使用](atom/README.md)
+* Chrome
+  - [使用](chrome/README.md)
+* Web Server
+  - [apache](server/apache.md)
+  - [nginx](server/nginx.md)
+* C
+  - [Makefile](c/Makefile.md)
+  - [GDB](c/GDB.md)
+  - [Cmake](c/Cmake.md)
+* Git
+  - [使用](git/README.md)
+* Html
+  - [语法](html/README.md)
+* Markdown
+  - [语法](markdown/语法.md)
+  - [MathJax语法](markdown/mathjax.md)
+* Maven
+  - [使用](maven/README.md)
+* NodeJs
+  - [使用](nodejs/README.md)
+* Python
+  - [使用](python/README.md)
+* Ubuntu
+  - [命令](ubuntu/命令.md)
+  - [大文件](ubuntu/大文件.md)
+  - [配置](ubuntu/配置.md)
+  - [软件](ubuntu/软件.md)
+* Windows
+  - [SSH](windows/ssh.md)
+  - [配置](windows/配置.md)
+  - [Office](windows/office.md)
+  - [ConEmu](windows/ConEmu.md)
+* [软件](软件/README.md)

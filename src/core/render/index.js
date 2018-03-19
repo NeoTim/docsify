@@ -84,7 +84,6 @@ export function renderMixin(proto) {
 
     proto._renderSidebar = function (text) {
         const {maxLevel, subMaxLevel, loadSidebar} = this.config
-
         this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
         const activeEl = getAndActive(this.router, '.sidebar-nav', true, true)
         if (loadSidebar && activeEl) {
