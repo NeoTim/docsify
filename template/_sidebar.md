@@ -1,2 +1,6 @@
-* [英文示例](README.md)
-* [中文示例](cn.md)
+* [前言](README.md)
+
+* 示例
+
+    * [英文](demo/en.md)
+    * [中文](demo/cn.md)
