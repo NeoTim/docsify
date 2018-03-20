@@ -29,21 +29,16 @@
         loadNavbar: false,
         loadSidebar: true,
         coverpage: false,
-        name: '个人笔记',
+        name: '',
         subMaxLevel: 2,
         mergeNavbar: true,
         formatUpdated: '{MM}/{DD} {HH}:{mm}',
         plugins: [
             function (hook, vm) {
                 hook.beforeEach(function (html) {
-                    var url = 'https://github.com/QingWei-Li/docsify/blob/master/' + vm.route.file
-                    var editHtml = '[:memo: Edit Document](' + url + ')\n'
-
-                    return editHtml
-                        + html
+                    return html
                         + '\n----\n'
                         + 'Last modified {docsify-updated} '
-                        + editHtml
                 })
                 hook.afterEach((html)=> {
                     // console.log(vm.render);

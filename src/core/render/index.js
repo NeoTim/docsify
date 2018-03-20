@@ -109,20 +109,14 @@ export function renderMixin(proto) {
 
     proto._renderSidebar = function (text) {
         const {maxLevel, subMaxLevel, loadSidebar} = this.config
-        // console.log(html);
-        // let parser = new DOMParser();
-        // let dom = parser.parseFromString(html, "text/xml");
-        // console.log(dom.childNodes[0].children);
         let html = this.compiler.sidebar(text, maxLevel);
         let parser = new DOMParser();
         let dom = parser.parseFromString(html, "text/xml");
-        //console.log(dom)
         if (dom.children.length > 0) {
             addNumLabelForSidebar(dom.children[0], '', 1);
-            let xmlserializer = new XMLSerializer()
-            html = xmlserializer.serializeToString(dom)
+            let xmlSerializer = new XMLSerializer()
+            html = xmlSerializer.serializeToString(dom)
         }
-        // console.log(html);
         //this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
         this._renderTo('.sidebar-nav', html)
         const activeEl = getAndActive(this.router, '.sidebar-nav', true, true)
