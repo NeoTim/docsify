@@ -39,7 +39,7 @@ function renderMain(html) {
         // TODO: Custom 404 page
         html = 'not found'
     }
-
+    // console.log("html " + html);
     this._renderTo('.markdown-section', html)
     // Render sidebar with the TOC
     !this.config.loadSidebar && this._renderSidebar()
@@ -108,14 +108,16 @@ export function renderMixin(proto) {
     }
 
     proto._renderSidebar = function (text) {
-        const {maxLevel, subMaxLevel, loadSidebar} = this.config
+        const {maxLevel, subMaxLevel, loadSidebar, showLevel} = this.config
         let html = this.compiler.sidebar(text, maxLevel);
-        let parser = new DOMParser();
-        let dom = parser.parseFromString(html, "text/xml");
-        if (dom.children.length > 0) {
-            addNumLabelForSidebar(dom.children[0], '', 1);
-            let xmlSerializer = new XMLSerializer()
-            html = xmlSerializer.serializeToString(dom)
+        if (showLevel) {
+            let parser = new DOMParser();
+            let dom = parser.parseFromString(html, "text/xml");
+            if (dom.children.length > 0) {
+                addNumLabelForSidebar(dom.children[0], '', 1);
+                let xmlSerializer = new XMLSerializer()
+                html = xmlSerializer.serializeToString(dom)
+            }
         }
         //this._renderTo('.sidebar-nav', this.compiler.sidebar(text, maxLevel))
         this._renderTo('.sidebar-nav', html)
@@ -158,7 +160,7 @@ export function renderMixin(proto) {
         if (!text) {
             return renderMain.call(this, text)
         }
-
+        this.compiler.calTocStart(text)
         callHook(this, 'beforeEach', text, result => {
             let html
             const callback = () => {

@@ -19,10 +19,10 @@
 <div id="app"></div>
 <script>
     window.$docsify = {
-        alias: {
-            '.*?/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG',
-            '/.*/_navbar.md': '/_navbar.md'
-        },
+        // alias: {
+        //     '.*?/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG',
+        //     '/.*/_navbar.md': '/_navbar.md'
+        // },
         auto2top: true,
         basePath: '/docs/',
         executeScript: true,
@@ -31,16 +31,21 @@
         coverpage: false,
         name: '',
         subMaxLevel: 2,
-        mergeNavbar: true,
-        formatUpdated: '{MM}/{DD} {HH}:{mm}',
+        mergeNavbar: false,
+        formatUpdated: '{YYYY}-{MM}-{DD}',
+        showLevel: true,
+        tocLevel: 3,
         plugins: [
             function (hook, vm) {
                 hook.beforeEach(function (html) {
+                    // console.log(vm.compiler.toc)
+                    //console.log(html)
+                    // vm.compiler._calTocStart(html);
                     return html
                         + '\n----\n'
-                        + 'Last modified {docsify-updated} '
+                        + '最后修改时间 {docsify-updated} '
                 })
-                hook.afterEach((html)=> {
+                hook.afterEach((html) => {
                     // console.log(vm.render);
                     // console.log(html)
                     // html = ""
