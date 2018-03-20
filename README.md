@@ -24,6 +24,13 @@
   </a>
 </p>
 
+## Change
+
+* Add line number for highlight code.
+* Add number index for sidebar.
+* Add toc auto generation for markdown file. 
+* Change css style.
+
 ## Links
 
 * [Documentation](https://docsify.js.org)
