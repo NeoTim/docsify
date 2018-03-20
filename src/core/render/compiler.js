@@ -63,6 +63,11 @@ export class Compiler {
         this.toc = []
         this.linkTarget = config.externalLinkTarget || '_blank'
         this.contentBase = router.getBasePath()
+        this.pageToc = {
+            tag: "<!-- toc -->",
+            hasTag: false,
+            start: 0
+        }
 
         const renderer = this._initRenderer()
         let compile
@@ -90,7 +95,9 @@ export class Compiler {
             } else {
                 html = compile.parser(text)
             }
-
+            // console.log(html)
+            // this._calTocStart(text);
+            html = this._genToc(html);
             html = config.noEmoji ? html : emojify(html)
             slugify.clear()
 
@@ -178,6 +185,34 @@ export class Compiler {
         }
         // highlight code
         origin.code = renderer.code = function (code, lang = '') {
+            // code = code.replace(/@DOCSIFY_QM@/g, '`')
+            // const hl = Prism.highlight(
+            //     code,
+            //     Prism.languages[lang] || Prism.languages.markup
+            // )
+            //
+            // return `<pre class="line-numbers" v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
+
+            // let parser = new DOMParser();
+            // let html = `<pre  class="line-numbers language-${lang}"  data-lang="${lang}"><code class="language-${lang} lang-${lang}">${code}</code></pre>`
+
+            // let dom = parser.parseFromString(html, "text/html");
+
+            // const hl = Prism.highlight(
+            //     html,
+            //     Prism.languages[lang] || Prism.languages.markup
+            // )
+            //
+            // return `<pre class="line-numbers" v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
+
+            // Prism.highlightElement(dom.children[0]);
+            // console.log(dom);
+
+            // let xmlSerializer = new XMLSerializer()
+            // html = xmlSerializer.serializeToString(dom)
+            // return html;
+
+
             code = code.replace(/</g, "&lt").replace(/>/g, "&gt");
             return `<pre v-pre data-lang="${lang}"><code class="language-${lang} lang-${lang}">${code}</code></pre>`
         }
@@ -319,4 +354,82 @@ export class Compiler {
 
         return html
     }
+
+    calTocStart(text) {
+        let heading = /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/igm;
+        let match;
+        let tocTagPos = text.indexOf(this.pageToc.tag);
+        let tocStartIndex = 0;
+        if (tocTagPos === -1) {
+            this.pageToc.hasTag = false;
+            return;
+        }
+
+        this.pageToc.hasTag = true;
+        while ((match = heading.exec(text)) != null) {
+            if (match.index > tocTagPos) {
+                break;
+            }
+            tocStartIndex++;
+        }
+        this.pageToc.start = tocStartIndex;
+    }
+
+    _genToc(html) {
+        if (!this.pageToc.hasTag) {
+            return html;
+        }
+        let tocTag = this.pageToc.tag;
+        let tocLevel = this.config.tocLevel;
+        let i, j, singleToc;
+        let tocHtml = "";
+        let ulCount = 0;
+        let minLevel = 5;
+        let toc = this.toc;
+        let start = this.pageToc.start;
+
+        for (i = start; i < toc.length; i++) {
+            singleToc = toc[i];
+            if (singleToc.level < minLevel) {
+                minLevel = singleToc.level;
+            }
+        }
+        let lastLevel = minLevel - 1;
+
+        for (i = start; i < toc.length; i++) {
+            singleToc = toc[i];
+
+            if (singleToc.level > tocLevel) {
+                continue;
+            }
+            if (lastLevel > singleToc.level) {
+                for (j = lastLevel - singleToc.level; j >= 0; j--) {
+                    tocHtml += "</ul>";
+                    ulCount--;
+                }
+                tocHtml += "<ul class='toc'>";
+                ulCount++;
+            }
+
+            if (lastLevel < singleToc.level) {
+                for (j = singleToc.level - lastLevel; j > 0; j--) {
+                    tocHtml += "<ul class='toc'>";
+                    ulCount++;
+                }
+
+            }
+            tocHtml += "<li><a href='" + singleToc.slug + "'>" + singleToc.title + "</a></li>"
+            lastLevel = singleToc.level;
+        }
+
+        for (i = 0; i < ulCount; i++) {
+            tocHtml += "</ul>"
+        }
+
+        html = html.replace(tocTag, tocHtml);
+        this.pageToc.hasTag = false;
+        this.pageToc.start = 0;
+        return html;
+    }
+
 }

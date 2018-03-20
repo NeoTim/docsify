@@ -42,6 +42,7 @@ export function main(config) {
         (isMobile ? `${aside}<main>` : `<main>${aside}`) +
         '<section class="content">' +
         '<article class="markdown-section" id="main"><!--main--></article>' +
+        '<div class="load" id="load">Loading...</div>' +
         '</section>' +
         '</main>'
     )
