@@ -185,6 +185,34 @@ export class Compiler {
         }
         // highlight code
         origin.code = renderer.code = function (code, lang = '') {
+            // code = code.replace(/@DOCSIFY_QM@/g, '`')
+            // const hl = Prism.highlight(
+            //     code,
+            //     Prism.languages[lang] || Prism.languages.markup
+            // )
+            //
+            // return `<pre class="line-numbers" v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
+
+            // let parser = new DOMParser();
+            // let html = `<pre  class="line-numbers language-${lang}"  data-lang="${lang}"><code class="language-${lang} lang-${lang}">${code}</code></pre>`
+
+            // let dom = parser.parseFromString(html, "text/html");
+
+            // const hl = Prism.highlight(
+            //     html,
+            //     Prism.languages[lang] || Prism.languages.markup
+            // )
+            //
+            // return `<pre class="line-numbers" v-pre data-lang="${lang}"><code class="lang-${lang}">${hl}</code></pre>`
+
+            // Prism.highlightElement(dom.children[0]);
+            // console.log(dom);
+
+            // let xmlSerializer = new XMLSerializer()
+            // html = xmlSerializer.serializeToString(dom)
+            // return html;
+
+
             code = code.replace(/</g, "&lt").replace(/>/g, "&gt");
             return `<pre v-pre data-lang="${lang}"><code class="language-${lang} lang-${lang}">${code}</code></pre>`
         }
@@ -379,7 +407,7 @@ export class Compiler {
                     tocHtml += "</ul>";
                     ulCount--;
                 }
-                tocHtml += "<ul>";
+                tocHtml += "<ul class='toc'>";
                 ulCount++;
             }
 
