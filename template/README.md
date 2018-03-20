@@ -9,7 +9,7 @@
 * 页面支持生成 toc 目录，在需要生成目录的地方加入 `<!-- toc -->` 即可，可以通过 `tocLevel: 3` 来设置生成目录的最小标题级别。
 * 对样式做了一些修改。
 
-可以点击 [这里](/template/template.rar) 下载模版文件，直接可以使用。更多的使用方法可以参考 [官网](https://docsify.js.org/)。
+可以点击 [这里](http://doc.zhangjikai.com/template/template.rar) 下载模版文件，直接可以使用。更多的使用方法可以参考 [官网](https://docsify.js.org/)。
 
 
 
