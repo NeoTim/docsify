@@ -117,6 +117,7 @@ export function renderMixin(proto) {
         let parser = new DOMParser();
         let dom = parser.parseFromString(html, "text/xml");
         //console.log(dom)
+
         if (dom.children.length > 0) {
             addNumLabelForSidebar(dom.children[0], '', 1);
             let xmlserializer = new XMLSerializer()
