@@ -265,3 +265,12 @@ h1, h2 {
   font-size: 1.2rem;
   margin: -1rem 0 0 -2rem;
 }
+
+code[class*="language-"], pre[class*="language-"] {
+  line-height: 1.3;
+  font-size: 0.95em;
+}
+
+.line-numbers .line-numbers-rows {
+  line-height: 1.4;
+}
